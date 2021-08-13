@@ -1,0 +1,23 @@
+{
+	"name": "MMM-NestRemoteThermostat",
+	"version": "1.0.0",
+	"description": "MagicMirror module that displays a Nest like Thermostat from a remote sensor.",
+	"main": "MMM-NestRemoteThermostat.js",
+	"author": "Simon Vallières",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/sisimomo/MMM-NestRemoteThermostat"
+	},
+	"keywords": [
+		"MagicMirror",
+		"module",
+		"temperature",
+		"nest",
+		"thermostat",
+		"RaspberryPi"
+	],
+	"dependencies": {
+		"body-parser": "^1.19.0"
+	}
+}

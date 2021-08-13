@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="../thermostatDial.css">
+	<script type="text/javascript" src="../thermostatDial.js"></script>
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function(event) {
+
+			var nest = new thermostatDial(document.getElementById('thermostat'), (str) => { return str; }, {
+				diameter: 400,
+				minValue: 10, 						// Minimum value for target temperature
+				maxValue: 30, 						// Maximum value for target temperature
+				numTicks: 120, 						// Number of tick lines to display around the dial
+				fanIconSize: 50,					// Size in px of the fan icon
+				largeBarThickness: 2.5,				// Increase of size for large tick line in pixel
+				roundTargetTemperature	: true, 	// If you have to round the target temperature to closest 0.5
+				roundAmbientTemperature	: true 		// If you have to round the ambient temperature to closest 0.5
+			}, {
+				fanSpeeds: [ '../images/fanIconSpeed1.gif', '../images/fanIconSpeed2.gif', '../images/fanIconSpeed3.gif', '../images/fanIconSpeed4.gif', '../images/fanIconSpeed5.gif' ],
+			});
+
+			document.getElementById('input_targetTemperature').addEventListener('input',function() {
+				document.getElementById('input_loading').value = false;
+				nest.targetTemperature = this.value;
+				console.log(this.value);
+			});
+			document.getElementById('input_ambientTemperature').addEventListener('input',function() {
+				document.getElementById('input_loading').value = false;
+				nest.ambientTemperature = this.value;
+				console.log(this.value);
+			});
+			document.getElementById('input_fanSpeed').addEventListener('change',function() {
+				document.getElementById('input_loading').value = false;
+				nest.fanSpeed = parseInt(this.value);
+			});
+			document.getElementById('input_state').addEventListener('change',function() {
+				document.getElementById('input_loading').value = false;
+				nest.hvacState = this.value;
+			});
+			document.getElementById('input_loading').addEventListener('change',function() {
+				nest.loading = (this.value === 'true');
+			});
+		});
+	</script>
+	<style>
+		body {
+			background-color: #CCCCCC;
+		}
+		#thermostat {
+			width: 50vmin;
+			height: 50vmin;
+			margin: 0 auto;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+		}
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+		#controls {
+			font-family: Open Sans;
+			background-color: rgba(255,255,255,0.25);
+			padding: 20px;
+			border-radius: 5px;
+			position: absolute;
+			left: 50%;
+			transform: translatex(-50%);
+			margin-top: 20px;
+		}
+		#controls label {
+			text-align: left;
+			display: block;
+		}
+		#controls label span {
+			display: inline-block;
+			width: 200px;
+			text-align: right;
+			font-size: 0.8em;
+			text-transform: uppercase;
+		}
+		#controls p {
+			margin: 0;
+			margin-bottom: 1em;
+			padding-bottom: 1em;
+			border-bottom: 2px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<!-- https://codepen.io/dalhundal/pen/KpabZB -->
+	<div class="MMM-NestRemoteThermostat" id='container'>
+		<div id='thermostat'></div>
+
+		<div id='controls'>
+
+			<label><span>Target Temperature</span>
+				<input type='range' min='10' max='30' value='10' id='input_targetTemperature' step='0.1' />
+			</label>
+
+			<label><span>Ambient Temperature</span>
+				<input type='range' min='-5' max='40' value='20' id='input_ambientTemperature' step='0.1' />
+			</label>
+
+			<label><span>State</span>
+				<select id='input_state'>
+					<option value='off'>Off</option>
+					<option value='heating'>Heating</option>
+					<option value='cooling'>Cooling</option>
+					<option value='fan'>Fan</option>
+					<option value='dry'>Dry</option>
+				</select>
+			</label>
+
+			<label><span>fan Speed</span>
+				<select id='input_fanSpeed'>
+					<option>0</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
+			</label>
+
+			<label><span>Loading</span>
+				<select id='input_loading'>
+					<option value='true'>Loading</option>
+					<option value='false'>Not loading</option>
+				</select>
+			</label>
+		</div>
+
+	</div>
+</body>
+</html>

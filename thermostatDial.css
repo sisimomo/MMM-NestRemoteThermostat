@@ -1,0 +1,102 @@
+.MMM-NestRemoteThermostat .dial.loading .dial__lbl--loading {
+	opacity: 1;
+}
+.MMM-NestRemoteThermostat .dial.loading path.active,
+.MMM-NestRemoteThermostat .dial.loading .dial__lbl--target,
+.MMM-NestRemoteThermostat .dial.loading .dial__lbl--target--half,
+.MMM-NestRemoteThermostat .dial.loading .dial__lbl--fan-speed-icon,
+.MMM-NestRemoteThermostat .dial.loading .dial__lbl--fan-speed-label {
+	visibility: hidden;
+}
+.MMM-NestRemoteThermostat .dial.loading .dial__lbl--hvac-state,
+.MMM-NestRemoteThermostat .dial.loading .dial__lbl--ambient {
+	opacity: 0;
+}
+
+.MMM-NestRemoteThermostat .dial .dial__shape {
+	transition: fill 0.5s;
+}
+.MMM-NestRemoteThermostat .dial__editableIndicator {
+	fill: white;
+	fill-rule: evenodd;
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+.MMM-NestRemoteThermostat .dial--edit .dial__editableIndicator {
+	opacity: 1;
+}
+.MMM-NestRemoteThermostat .dial--state--off .dial__shape {
+	fill: #222;
+}
+.MMM-NestRemoteThermostat .dial--state--heating .dial__shape {
+	fill: #E36304;
+}
+.MMM-NestRemoteThermostat .dial--state--cooling .dial__shape {
+	fill: #007AF1;
+}
+.MMM-NestRemoteThermostat .dial--state--cooling .dial__shape {
+	fill: #007AF1;
+}
+.MMM-NestRemoteThermostat .dial--state--fan .dial__shape {
+	fill: #8e8e8e;
+}
+.MMM-NestRemoteThermostat .dial--state--dry .dial__shape {
+	fill: #00cc99;
+}
+.MMM-NestRemoteThermostat .dial__ticks path {
+	fill: rgba(255,255,255,0.3);
+}
+.MMM-NestRemoteThermostat .dial__ticks path.active {
+	fill: rgba(255,255,255,0.8);
+}
+.MMM-NestRemoteThermostat .dial text {
+	fill: white;
+	text-anchor: middle;
+	font-family: Helvetica, sans-serif;
+	alignment-baseline: central;
+}
+.MMM-NestRemoteThermostat .dial__lbl--target {
+	font-size: 120px;
+	font-weight: bold;
+}
+.MMM-NestRemoteThermostat .dial__lbl--target--half {
+	font-size: 40px;
+	font-weight: bold;
+	opacity: 0;
+	transition: opacity 0.1s;
+}
+.MMM-NestRemoteThermostat .dial__lbl--target--half.shown {
+	opacity: 1;
+	transition: opacity 0s;
+}
+.MMM-NestRemoteThermostat .dial__lbl--ambient {
+	font-size: 28px;
+	font-weight: bold;
+}
+.MMM-NestRemoteThermostat .dial__lbl--loading {
+	font-size: 50px;
+	font-weight: bold;
+	opacity: 0;
+	pointer-events: none;
+	animation: MMM-NestRemoteThermostat-breathe 3500ms infinite forwards;
+}
+.MMM-NestRemoteThermostat .dial__lbl--hvac-state {
+	font-size: 22px;
+	font-weight: bold;
+	opacity: 0.75;
+}
+.MMM-NestRemoteThermostat .dial__lbl--fan-speed-label {
+	font-weight: bold;
+	opacity: 0.90;
+}
+@keyframes MMM-NestRemoteThermostat-breathe {
+	0% {
+		font-size: 50px;
+	}
+	50% {
+		font-size: 45px;
+	}
+	100% {
+		font-size: 50px;
+	}
+}
