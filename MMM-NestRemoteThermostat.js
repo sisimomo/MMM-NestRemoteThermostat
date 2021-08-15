@@ -31,13 +31,13 @@ Module.register('MMM-NestRemoteThermostat', {
 
 	getScripts() {
 		return [
-			this.file('thermostatDial.js')
+			this.file('NestThermostat.js')
 		];
 	},
 
 	getStyles() {
 		return [
-			this.file('thermostatDial.css')
+			this.file('NestThermostat.css')
 		];
 	},
 
@@ -59,30 +59,33 @@ Module.register('MMM-NestRemoteThermostat', {
 		if (this.thermostat) {
 
 			if (this.newValues.targetTemperature) {
-				this.thermostat.targetTemperature = this.newValues.targetTemperature;
+				this.thermostat.setTargetTemperature(this.newValues.targetTemperature);
 			}
 			if (this.newValues.ambientTemperature) {
-				this.thermostat.ambientTemperature = this.newValues.ambientTemperature;
+				this.thermostat.setAmbientTemperature(this.newValues.ambientTemperature);
 			}
 			if (this.newValues.hvacState) {
-				this.thermostat.hvacState = this.newValues.hvacState;
+				this.thermostat.setHvacState(this.newValues.hvacState);
 			}
 			if (this.newValues.fanSpeed) {
-				this.thermostat.fanSpeed = this.newValues.fanSpeed;
+				this.thermostat.setFanSpeed(this.newValues.fanSpeed);
 			}
 			if (this.newValues.loading) {
-				this.thermostat.loading = this.newValues.loading;
+				this.thermostat.setLoading(this.newValues.loading);
 			}
 			this.newValues = {};
 		} else {
 			this.thermostatDiv = document.createElement('div');
 
-			const translateLocal = (str) => {
-				return this.translate(str);
-			}
-
-			this.thermostat = new thermostatDial(this.thermostatDiv, translateLocal, this.config, {
-				fanSpeeds: [ './modules/MMM-NestRemoteThermostat/images/fanIconSpeed1.gif', './modules/MMM-NestRemoteThermostat/images/fanIconSpeed2.gif', './modules/MMM-NestRemoteThermostat/images/fanIconSpeed3.gif', './modules/MMM-NestRemoteThermostat/images/fanIconSpeed4.gif', './modules/MMM-NestRemoteThermostat/images/fanIconSpeed5.gif' ],
+			this.thermostat = new NestThermostat({
+				targetElement: this.thermostatDiv,
+				translateFn: (str) => {
+					return this.translate(str);
+				},
+				options: this.config,
+				properties: {
+					fanSpeeds: [ this.file('/images/fanIconSpeed1.gif'), this.file('/images/fanIconSpeed2.gif'), this.file('/images/fanIconSpeed3.gif'), this.file('/images/fanIconSpeed4.gif'), this.file('/images/fanIconSpeed5.gif') ],
+				}
 			});
 
 			this.thermostatDiv.style.width = this.config.width;
@@ -102,7 +105,7 @@ Module.register('MMM-NestRemoteThermostat', {
 					fanSpeed: payload.fanSpeed,
 					loading: payload.loading
 				};
-				Log.info('MMM-NestRemoteThermostat with thermostatId: "' + this.config.thermostatId + '" just receive new values.', this.newValues);
+				Log.info('MMM-NestRemoteThermostat, thermostatId: "' + this.config.thermostatId + '" just receive new values.', this.newValues);
 
 				this.updateDom();
 			}
