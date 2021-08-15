@@ -1,6 +1,6 @@
 {
 	"name": "MMM-NestRemoteThermostat",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "MagicMirror module that displays a Nest like Thermostat from a remote sensor.",
 	"main": "MMM-NestRemoteThermostat.js",
 	"author": "Simon Vallières",

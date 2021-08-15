@@ -2,45 +2,55 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="../thermostatDial.css">
-	<script type="text/javascript" src="../thermostatDial.js"></script>
+	<link rel="stylesheet" href="../NestThermostat.css">
+	<script type="text/javascript" src="../NestThermostat.js"></script>
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function(event) {
 
-			var nest = new thermostatDial(document.getElementById('thermostat'), (str) => { return str; }, {
-				diameter: 400,
-				minValue: 10, 						// Minimum value for target temperature
-				maxValue: 30, 						// Maximum value for target temperature
-				numTicks: 120, 						// Number of tick lines to display around the dial
-				fanIconSize: 50,					// Size in px of the fan icon
-				largeBarThickness: 2.5,				// Increase of size for large tick line in pixel
-				roundTargetTemperature	: true, 	// If you have to round the target temperature to closest 0.5
-				roundAmbientTemperature	: true 		// If you have to round the ambient temperature to closest 0.5
-			}, {
-				fanSpeeds: [ '../images/fanIconSpeed1.gif', '../images/fanIconSpeed2.gif', '../images/fanIconSpeed3.gif', '../images/fanIconSpeed4.gif', '../images/fanIconSpeed5.gif' ],
+			let nest = new NestThermostat({
+				targetElement: document.getElementById('thermostat'),
+				translateFn: (str) => { return str; },
+				options: {
+					diameter: 400,
+					minValue: 10, 						// Minimum value for target temperature
+					maxValue: 30, 						// Maximum value for target temperature
+					numTicks: 120, 						// Number of tick lines to display around the dial
+					fanIconSize: 50,					// Size in px of the fan icon
+					largeBarThickness: 2.5,				// Increase of size for large tick line in pixel
+					roundTargetTemperature	: true, 	// If you have to round the target temperature to closest 0.5
+					roundAmbientTemperature	: true	 	// If you have to round the ambient temperature to closest 0.5
+				},
+				properties: {
+					fanSpeeds: [ '../images/fanIconSpeed1.gif', '../images/fanIconSpeed2.gif', '../images/fanIconSpeed3.gif', '../images/fanIconSpeed4.gif', '../images/fanIconSpeed5.gif' ],
+				}
 			});
 
 			document.getElementById('input_targetTemperature').addEventListener('input',function() {
 				document.getElementById('input_loading').value = false;
-				nest.targetTemperature = this.value;
+				nest.setTargetTemperature(this.value);
 				console.log(this.value);
 			});
+
 			document.getElementById('input_ambientTemperature').addEventListener('input',function() {
 				document.getElementById('input_loading').value = false;
-				nest.ambientTemperature = this.value;
+				nest.setAmbientTemperature(this.value);
 				console.log(this.value);
 			});
+
 			document.getElementById('input_fanSpeed').addEventListener('change',function() {
 				document.getElementById('input_loading').value = false;
-				nest.fanSpeed = parseInt(this.value);
+				nest.setFanSpeed(parseInt(this.value));
 			});
+
 			document.getElementById('input_state').addEventListener('change',function() {
 				document.getElementById('input_loading').value = false;
-				nest.hvacState = this.value;
+				nest.setHvacState(this.value);
 			});
+
 			document.getElementById('input_loading').addEventListener('change',function() {
-				nest.loading = (this.value === 'true');
+				nest.setLoading(this.value === 'true');
 			});
+
 		});
 	</script>
 	<style>
