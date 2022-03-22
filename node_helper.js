@@ -14,9 +14,10 @@ module.exports = NodeHelper.create({
 				thermostatId: params.thermostatId,
 				targetTemperature: params.targetTemperature,
 				ambientTemperature: params.ambientTemperature,
-				hvacState: params.hvacState.toLowerCase(),
-				fanSpeed: params.fanSpeed,
-				loading: params.loading
+				state: params.state.toLowerCase(),
+				power: params.power,
+				icon: params.icon.toLowerCase(),
+				loading: typeof params.loading == "boolean" ? params.loading : params.loading == "True"
 			};
 
 			res.send({"status": "success", "payload": payload,});

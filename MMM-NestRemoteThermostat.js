@@ -18,7 +18,7 @@ Module.register('MMM-NestRemoteThermostat', {
 		minValue: undefined,
 		maxValue: undefined,
 		numTicks: undefined,
-		fanIconSize: undefined,
+		iconSize: undefined,
 		largeBarThickness: undefined,
 		roundTargetTemperature: undefined,
 		roundAmbientTemperature: undefined,
@@ -57,22 +57,22 @@ Module.register('MMM-NestRemoteThermostat', {
 
 	getDom() {
 		if (this.thermostat) {
-
 			if (this.newValues.targetTemperature) {
 				this.thermostat.setTargetTemperature(this.newValues.targetTemperature);
 			}
 			if (this.newValues.ambientTemperature) {
 				this.thermostat.setAmbientTemperature(this.newValues.ambientTemperature);
 			}
-			if (this.newValues.hvacState) {
-				this.thermostat.setHvacState(this.newValues.hvacState);
+			if (this.newValues.state) {
+				this.thermostat.setState(this.newValues.state);
 			}
-			if (this.newValues.fanSpeed) {
-				this.thermostat.setFanSpeed(this.newValues.fanSpeed);
+			if (this.newValues.power) {
+				this.thermostat.setPower(this.newValues.power);
 			}
-			if (this.newValues.loading) {
-				this.thermostat.setLoading(this.newValues.loading);
+			if (this.newValues.icon) {
+				this.thermostat.setIcon(this.newValues.icon);
 			}
+			this.thermostat.setLoading(this.newValues.loading);
 			this.newValues = {};
 		} else {
 			this.thermostatDiv = document.createElement('div');
@@ -84,7 +84,8 @@ Module.register('MMM-NestRemoteThermostat', {
 				},
 				options: this.config,
 				properties: {
-					fanSpeeds: [ this.file('/images/fanIconSpeed1.gif'), this.file('/images/fanIconSpeed2.gif'), this.file('/images/fanIconSpeed3.gif'), this.file('/images/fanIconSpeed4.gif'), this.file('/images/fanIconSpeed5.gif') ],
+					fanIcons:  [ this.file('/images/fanIconSpeed1.gif'), this.file('/images/fanIconSpeed2.gif'), this.file('/images/fanIconSpeed3.gif'), this.file('/images/fanIconSpeed4.gif'), this.file('/images/fanIconSpeed5.gif') ],
+					radiatorIcon: this.file('/images/radiator.gif')
 				}
 			});
 
@@ -101,8 +102,9 @@ Module.register('MMM-NestRemoteThermostat', {
 				this.newValues = {
 					targetTemperature: payload.targetTemperature,
 					ambientTemperature: payload.ambientTemperature,
-					hvacState: payload.hvacState,
-					fanSpeed: payload.fanSpeed,
+					state: payload.state,
+					power: payload.power,
+					icon: payload.icon,
 					loading: payload.loading
 				};
 				Log.info('MMM-NestRemoteThermostat, thermostatId: "' + this.config.thermostatId + '" just receive new values.', this.newValues);

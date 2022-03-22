@@ -15,36 +15,37 @@
 					minValue: 10, 						// Minimum value for target temperature
 					maxValue: 30, 						// Maximum value for target temperature
 					numTicks: 120, 						// Number of tick lines to display around the dial
-					fanIconSize: 50,					// Size in px of the fan icon
+					iconSize: 50,					// Size in px of the fan icon
 					largeBarThickness: 2.5,				// Increase of size for large tick line in pixel
 					roundTargetTemperature	: true, 	// If you have to round the target temperature to closest 0.5
 					roundAmbientTemperature	: true	 	// If you have to round the ambient temperature to closest 0.5
 				},
 				properties: {
-					fanSpeeds: [ '../images/fanIconSpeed1.gif', '../images/fanIconSpeed2.gif', '../images/fanIconSpeed3.gif', '../images/fanIconSpeed4.gif', '../images/fanIconSpeed5.gif' ],
+					fanIcons: [ '../images/fanIconSpeed1.gif', '../images/fanIconSpeed2.gif', '../images/fanIconSpeed3.gif', '../images/fanIconSpeed4.gif', '../images/fanIconSpeed5.gif' ],
+					radiatorImage: '../images/radiator.gif'
 				}
 			});
 
 			document.getElementById('input_targetTemperature').addEventListener('input',function() {
-				document.getElementById('input_loading').value = false;
 				nest.setTargetTemperature(this.value);
 				console.log(this.value);
 			});
 
 			document.getElementById('input_ambientTemperature').addEventListener('input',function() {
-				document.getElementById('input_loading').value = false;
 				nest.setAmbientTemperature(this.value);
 				console.log(this.value);
 			});
 
-			document.getElementById('input_fanSpeed').addEventListener('change',function() {
-				document.getElementById('input_loading').value = false;
-				nest.setFanSpeed(parseInt(this.value));
+			document.getElementById('input_power').addEventListener('change',function() {
+				nest.setPower(parseInt(this.value));
 			});
 
 			document.getElementById('input_state').addEventListener('change',function() {
-				document.getElementById('input_loading').value = false;
-				nest.setHvacState(this.value);
+				nest.setState(this.value);
+			});
+
+			document.getElementById('input_icon').addEventListener('change',function() {
+				nest.setIcon(this.value);
 			});
 
 			document.getElementById('input_loading').addEventListener('change',function() {
@@ -118,8 +119,15 @@
 				</select>
 			</label>
 
-			<label><span>fan Speed</span>
-				<select id='input_fanSpeed'>
+			<label><span>Icon</span>
+				<select id='input_icon'>
+					<option value='fan'>Fan</option>
+					<option value='radiator'>Radiator</option>
+				</select>
+			</label>
+
+			<label><span>Fan Speed</span>
+				<select id='input_power'>
 					<option>0</option>
 					<option>1</option>
 					<option>2</option>

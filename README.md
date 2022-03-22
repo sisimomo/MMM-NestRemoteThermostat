@@ -9,7 +9,7 @@ For updates, please check the [CHANGELOG](https://github.com/sisimomo/MMM-NestRe
 When the page load, the first state will be loading until the module receive data :
 ```js
 {
-    hvacState: "off",	// Can be any thing between : ['off', 'heating', 'cooling', 'fan', 'dry' ]
+    state: "off",	// Can be any thing between : ['off', 'heating', 'cooling', 'fan', 'dry' ]
     loading: true
 }
 ```
@@ -27,10 +27,12 @@ When the page load, the first state will be loading until the module receive dat
 Here is the state of the module when Heating with and without fan speed :
 ```js
 {
+    thermostatId: '1',
     targetTemperature: 20,
     ambientTemperature: 21.5,
-    hvacState: "heating",
-    fanSpeed: 3 // 0 to hide fan icon
+    state: "heating",
+    icon: "fan",
+    power: 3 // 0 to hide fan icon
 }
 ```
 <p>
@@ -43,10 +45,12 @@ Here is the state of the module when Heating with and without fan speed :
 Here is the state of the module when Cooling with and without fan speed :
 ```js
 {
+    thermostatId: '1',
     targetTemperature: 19,
     ambientTemperature: 23.5,
-    hvacState: "cooling",
-    fanSpeed: 5 // 0 to hide fan icon
+    state: "cooling",
+    icon: "fan",
+    power: 5 // 0 to hide fan icon
 }
 ```
 <p>
@@ -59,10 +63,12 @@ Here is the state of the module when Cooling with and without fan speed :
 Here is the state of the module when in Fan with and without fan speed :
 ```js
 {
+    thermostatId: '1',
     targetTemperature: 21.5,
     ambientTemperature: 21.5,
-    hvacState: "fan",
-    fanSpeed: 1 // 0 to hide fan icon
+    state: "fan",
+    icon: "fan",
+    power: 1 // 0 to hide fan icon
 }
 ```
 <p>
@@ -75,10 +81,12 @@ Here is the state of the module when in Fan with and without fan speed :
 Here is the state of the module when in Dry with and without fan speed :
 ```js
 {
+    thermostatId: '1',
     targetTemperature: 19.5,
     ambientTemperature: 19.5,
-    hvacState: "dry",
-    fanSpeed: 4 // 0 to hide fan icon
+    state: "dry",
+    icon: "fan",
+    power: 4 // 0 to hide fan icon
 }
 ```
 <p>
@@ -173,7 +181,7 @@ For security reasons the MagicMirror is *not* reachable externally, which also m
 | `maxValue`				| The bigest displayable value on the dial of the thermostat.<br><br> **Type:** `Integer` <br>**Default value:** `30`
 | `numTicks`				| Number of tick lines to display around the dial. <br><br> **Type:** `Integer` <br>**Default value:** `150`
 | `largeBarThickness`		| Increase of size for large tick line in pixel. <br><br> **Type:** `Integer` <br>**Default value:** `2.5`
-| `fanIconSize`				| The size in px of the fan icon. <br><br> **Type:** `Integer` <br>**Default value:** `50`
+| `iconSize`				| The size in px of the fan icon. <br><br> **Type:** `Integer` <br>**Default value:** `50`
 | `roundTargetTemperature`	| Set to true if you want to round the target temperature to closest 0.5 .<br><br> **Type:** `Boolean` <br>**Default value:** `true`
 | `roundAmbientTemperature`	| Set to true if you want to round the ambient temperature to closest 0.5 .<br><br> **Type:** `Boolean` <br>**Default value:** `true`
 | `diameter`				| The diamiter of the dial. Dosen't affect the size of the dial but the size of the elements on the dials. <br><br> **Type:** `Integer` <br>**Default value:** `400`
@@ -190,10 +198,12 @@ This module can work with any thermostat that is capable to periodically send HT
 
 ```js
 {
+    thermostatId: '1',
     targetTemperature: 19.5,
     ambientTemperature: 19.5,
-    hvacState: "dry",
-    fanSpeed: 5,
+    state: "dry",
+    icon: "fan",
+    power: 5,
     loading: false
 }
 ```
@@ -204,12 +214,13 @@ If you want, you can update only the some proprieties. To do so, only specified 
 
 | Option				| Description
 |-----------------------|-----------
-| `thermostatId`			| **REQUIRED** the arbitrary value set in the config file of the desired thermostat. <br><br> **Type:** `String`
+| `thermostatId`			| **REQUIRED** The arbitrary value set in the config file of the desired thermostat. <br><br> **Type:** `String`
+| `loading`				| **REQUIRED** The loading status can be set when ever wanted. When set, it will hide every thing displayed on the dial. <br><br> **Type:** `Boolean` <br>**Default value:** `true`
 | `targetTemperature`	| The value that is display in the middle of the thermostat. <br><img src="./doc/screenshot-cooling-targetTemperature.png" width="150"> <br><br> **Type:** `Integer`
 | `ambientTemperature`	| The value that is display next to the ambient temperature bar of the thermostat. <br><img src="./doc/screenshot-cooling-ambientTemperature.png" width="150"> <br><br> **Type:** `Integer`
-| `hvacState`			| The state of the thermostat. Can be 'Off', 'Cooling', 'Heating' , 'Fan' or 'Dry'. The background color of the dial also change accordingly. <br><br> **Type:** `Integer` <br>**Possible values:** `['off', 'heating', 'cooling', 'fan', 'dry' ]`
-| `fanSpeed`			| The speed of the fan. This value can be set between 0-5. If set to 0, no icon will be show. When first loaded, the value is set to 0.<br><br> **Type:** `Integer` <br>**Possible values:** `[ 0, 1, 2, 3, 4, 5 ]`
-| `loading`				| The loading status can be set when ever wanted. When set, it will hide evry thing displayed on the dial. <br><br> **Type:** `Boolean` <br>**Default value:** `true`
+| `state`			| The state of the thermostat. Can be 'Off', 'Cooling', 'Heating' , 'Fan' or 'Dry'. The background color of the dial also change accordingly. <br><br> **Type:** `String` <br>**Possible values:** `[ 'off', 'heating', 'cooling', 'fan', 'dry' ]`
+| `icon`			| The icon of the thermostat. Can be 'Fan', 'Radiator'.<br><img src="./doc/screenshot-cooling-icon.png" width="150"> <br><br> **Type:** `String` <br>**Possible values:** `[ 'fan', 'radiator' ]`
+| `power`			| The speed of the fan. This value can be set between 0-5. If set to 0, no icon will be show. When first loaded, the value is set to 0.<br><br> **Type:** `Integer` <br>**Possible values:** `[ 0, 1, 2, 3, 4, 5 ]`
 
 Make sure that your thermostat properly sets the `Content-Type` header in the HTTP request to `application/json`, otherwise the module will not be able to parse the request body.
 
