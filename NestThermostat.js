@@ -9,14 +9,16 @@ class NestThermostat {
 		 * Options
 		 */
 		this.options = {
-			diameter				: options.diameter 					|| 400,		// The diamiter of the dial. Dosen't affect the size of the dial but the size of the elements on the dials.
-			minValue				: options.minValue 					|| 10, 		// Minimum value for target temperature
-			maxValue				: options.maxValue 					|| 30, 		// Maximum value for target temperature
-			numTicks				: options.numTicks 					|| 120, 	// Number of tick lines to display around the dial
-			iconSize				: options.iconSize					|| 50,		// Size in px of the fan icon
-			largeBarThickness		: options.largeBarThickness			|| 2.5,		// Increase of tick line size in pixel
-			roundTargetTemperature	: options.roundTargetTemperature != undefined ? options.roundTargetTemperature : true, 	// If you have to round the target temperature to closest 0.5
-			roundAmbientTemperature	: options.roundAmbientTemperature != undefined ? options.roundAmbientTemperature : true,	// If you have to round the ambient temperature to closest 0.5
+			diameter					: options.diameter 						|| 400,		// The diamiter of the dial. Dosen't affect the size of the dial but the size of the elements on the dials.
+			minValue					: options.minValue 						|| 10, 		// Minimum value for target temperature
+			maxValue					: options.maxValue 						|| 30, 		// Maximum value for target temperature
+			numTicks					: options.numTicks 						|| 120, 	// Number of tick lines to display around the dial
+			iconSize					: options.iconSize						|| 50,		// Size in px of the fan icon
+			largeBarThickness			: options.largeBarThickness				|| 2.5,		// Increase of tick line size in pixel
+			targetTemperaturePrecision	: options.targetTemperaturePrecision	|| .5,		// Set the level of precision for rounding the displayed target temperature (e.g., .5 rounds to the nearest half degree)
+			ambientTemperaturePrecision	: options.ambientTemperaturePrecision	|| .5,		// Set the level of precision for rounding the displayed ambient temperature (e.g., .5 rounds to the nearest half degree) 
+			roundTargetTemperature		: options.roundTargetTemperature != undefined ? options.roundTargetTemperature : true, 	// Deprecated in favor of targetTemperaturePrecision.  Remove from your config.
+			roundAmbientTemperature		: options.roundAmbientTemperature != undefined ? options.roundAmbientTemperature : true,	// Deprecated in favor of ambientTemperaturePrecision.  Remove from your config.
 		};
 
 		/*
@@ -59,7 +61,7 @@ class NestThermostat {
 
 	setTargetTemperature(targetTemperature) {
 		if (!isNaN(targetTemperature))  {
-			this.state.targetTemperature = NestThermostat.restrictToRange((this.options.roundTargetTemperature === false ? NestThermostat.roundToPrecision(targetTemperature, .1) : NestThermostat.roundToPrecision(targetTemperature, .5)));
+			this.state.targetTemperature = NestThermostat.restrictToRange((this.options.roundTargetTemperature === false ? NestThermostat.roundToPrecision(targetTemperature, .1) : NestThermostat.roundToPrecision(targetTemperature, 1)));
 			this.updateDom();
 		}
 	}
@@ -70,7 +72,7 @@ class NestThermostat {
 
 	setAmbientTemperature(ambientTemperature) {
 		if (!isNaN(ambientTemperature))  {
-			this.state.ambientTemperature = (this.options.roundAmbientTemperature === false ? NestThermostat.roundToPrecision(ambientTemperature, .1) : NestThermostat.roundToPrecision(ambientTemperature, .5));
+			this.state.ambientTemperature = (this.options.roundAmbientTemperature === false ? NestThermostat.roundToPrecision(ambientTemperature, .1) : NestThermostat.roundToPrecision(ambientTemperature, 1));
 			this.updateDom();
 		}
 	}
