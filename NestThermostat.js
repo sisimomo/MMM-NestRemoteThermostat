@@ -59,7 +59,7 @@ class NestThermostat {
 
 	setTargetTemperature(targetTemperature) {
 		if (!isNaN(targetTemperature))  {
-			this.state.targetTemperature = NestThermostat.restrictToRange((this.options.roundTargetTemperature ? NestThermostat.roundHalf(targetTemperature) : targetTemperature));
+			this.state.targetTemperature = NestThermostat.restrictToRange(NestThermostat.roundToPrecision(targetTemperature, .5));
 			this.updateDom();
 		}
 	}
@@ -70,7 +70,7 @@ class NestThermostat {
 
 	setAmbientTemperature(ambientTemperature) {
 		if (!isNaN(ambientTemperature))  {
-			this.state.ambientTemperature = (this.options.roundAmbientTemperature ? NestThermostat.roundHalf(ambientTemperature) : ambientTemperature);
+			this.state.ambientTemperature = (NestThermostat.roundToPrecision(ambientTemperature, .5));
 			this.updateDom();
 		}
 	}
@@ -443,9 +443,9 @@ class NestThermostat {
 		return val;
 	}
 
-	// Round a number to the nearest 0.5
-	static roundHalf(num) {
-		return Math.round(num*2)/2;
+	// Round a number to the specified precision
+	static roundToPrecision(num, precision) {
+		return Math.round(num/precision)*precision;
 	}
 
 	// Extract the first decimal as a number
