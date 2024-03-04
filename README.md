@@ -172,19 +172,21 @@ For security reasons the MagicMirror is *not* reachable externally, which also m
 
 ## Configuration options
 
-| Option					| Description
-|---------------------------|-----------
-| `thermostatId` 			| **REQUIRED** An arbitrary value that determines from which thermostat this module accepts updates. It can also be used as an API key to restrict access to your mirror.<br><br> **Type:** `String` <br>**Default value:** `null` (must be configured)
-| `width`					| The css width of the thermostat. <br><br> **Type:** `String` <br>**Default value:** `'20em'`
-| `height`					| The css height of the thermostat. <br><br> **Type:** `String` <br>**Default value:** `'20em'`
-| `minValue`				| The lowest displayable value on the dial of the thermostat. <br><br>**Type:** `Integer` <br>**Default value:** `10`
-| `maxValue`				| The bigest displayable value on the dial of the thermostat.<br><br> **Type:** `Integer` <br>**Default value:** `30`
-| `numTicks`				| Number of tick lines to display around the dial. <br><br> **Type:** `Integer` <br>**Default value:** `150`
-| `largeBarThickness`		| Increase of size for large tick line in pixel. <br><br> **Type:** `Integer` <br>**Default value:** `2.5`
-| `iconSize`				| The size in px of the fan icon. <br><br> **Type:** `Integer` <br>**Default value:** `50`
-| `roundTargetTemperature`	| Set to true if you want to round the target temperature to closest 0.5 .<br><br> **Type:** `Boolean` <br>**Default value:** `true`
-| `roundAmbientTemperature`	| Set to true if you want to round the ambient temperature to closest 0.5 .<br><br> **Type:** `Boolean` <br>**Default value:** `true`
-| `diameter`				| The diamiter of the dial. Dosen't affect the size of the dial but the size of the elements on the dials. <br><br> **Type:** `Integer` <br>**Default value:** `400`
+| Option						| Description
+|-------------------------------|-----------
+| `thermostatId` 				| **REQUIRED** An arbitrary value that determines from which thermostat this module accepts updates. It can also be used as an API key to restrict access to your mirror.<br><br> **Type:** `String` <br>**Default value:** `null` (must be configured)
+| `width`						| The css width of the thermostat. <br><br> **Type:** `String` <br>**Default value:** `'20em'`
+| `height`						| The css height of the thermostat. <br><br> **Type:** `String` <br>**Default value:** `'20em'`
+| `minValue`					| The lowest displayable value on the dial of the thermostat. <br><br>**Type:** `Integer` <br>**Default value:** `10`
+| `maxValue`					| The bigest displayable value on the dial of the thermostat.<br><br> **Type:** `Integer` <br>**Default value:** `30`
+| `numTicks`					| Number of tick lines to display around the dial. <br><br> **Type:** `Integer` <br>**Default value:** `150`
+| `largeBarThickness`			| Increase of size for large tick line in pixel. <br><br> **Type:** `Integer` <br>**Default value:** `2.5`
+| `iconSize`					| The size in px of the fan icon. <br><br> **Type:** `Integer` <br>**Default value:** `50`
+| `targetTemperaturePrecision	| Set the level of precision for display of the target temperature.  E.g., `.5` will round to the nearest half degre, and `1` will reound to the nearest degree. (You can set any number you want, but only one decimal place will be displayed at most.)<br><br> **Type:** `Float` <br>**Default value:** `.5`
+| `ambientTemperaturePrecision	| Set the level of precision for display of the target temperature.  E.g., `.5` will round to the nearest half degre, and `1` will reound to the nearest degree. (You can set any number you want, but only one decimal place will be displayed at most.)<br><br> **Type:** `Float` <br>**Default value:** `.5`
+| `roundTargetTemperature`		| **DEPRECATED** You should remove this from your config file if you have one set.
+| `roundAmbientTemperature`		| **DEPRECATED** You should remove this from your config file if you have one set.
+| `diameter`					| The diamiter of the dial. Dosen't affect the size of the dial but the size of the elements on the dials. <br><br> **Type:** `Integer` <br>**Default value:** `400`
 
 ## How it works
 
