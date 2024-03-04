@@ -70,7 +70,7 @@ class NestThermostat {
 
 	setAmbientTemperature(ambientTemperature) {
 		if (!isNaN(ambientTemperature))  {
-			this.state.ambientTemperature = (this.options.roundAmbientTemperature === false ? NestThermostat.roundToPrecision(ambientTemperature, .1) : NestThermostat.roundToPrecision(ambientTemperature, .5);
+			this.state.ambientTemperature = (this.options.roundAmbientTemperature === false ? NestThermostat.roundToPrecision(ambientTemperature, .1) : NestThermostat.roundToPrecision(ambientTemperature, .5));
 			this.updateDom();
 		}
 	}
