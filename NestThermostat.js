@@ -59,7 +59,7 @@ class NestThermostat {
 
 	setTargetTemperature(targetTemperature) {
 		if (!isNaN(targetTemperature))  {
-			this.state.targetTemperature = NestThermostat.restrictToRange((this.options.roundTargetTemperature === false ? NestThermostat.roundToPrecision(targetTemperature, .1) : NestThermostat.roundToPrecision(targetTemperature, .5));
+			this.state.targetTemperature = NestThermostat.restrictToRange((this.options.roundTargetTemperature ? NestThermostat.roundToPrecision(targetTemperature, .1) : NestThermostat.roundToPrecision(targetTemperature, .5)));
 			this.updateDom();
 		}
 	}
@@ -70,7 +70,7 @@ class NestThermostat {
 
 	setAmbientTemperature(ambientTemperature) {
 		if (!isNaN(ambientTemperature))  {
-			this.state.ambientTemperature = (this.options.roundAmbientTemperature === false ? NestThermostat.roundToPrecision(ambientTemperature, .1) : NestThermostat.roundToPrecision(ambientTemperature, .5));
+			this.state.ambientTemperature = (this.options.roundAmbientTemperature ? NestThermostat.roundToPrecision(ambientTemperature, .1) : NestThermostat.roundToPrecision(ambientTemperature, .5));
 			this.updateDom();
 		}
 	}
@@ -443,7 +443,7 @@ class NestThermostat {
 		return val;
 	}
 
-	// Round a number to the specified precision
+	// Round a number to the desired precision
 	static roundToPrecision(num, precision) {
 		return Math.round(num/precision)*precision;
 	}
