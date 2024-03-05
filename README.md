@@ -184,8 +184,8 @@ For security reasons the MagicMirror is *not* reachable externally, which also m
 | `iconSize`					| The size in px of the fan icon. <br><br> **Type:** `Integer` <br>**Default value:** `50`
 | `targetTemperaturePrecision`	| Set the level of precision for display of the target temperature.  E.g., `.5` will round to the nearest half degree, and `1` will round to the nearest degree. (You can set any number you want, but only one decimal place will be displayed at most.)<br><br> **Type:** `Float` <br>**Default value:** `.5`
 | `ambientTemperaturePrecision`	| Set the level of precision for display of the target temperature.  E.g., `.5` will round to the nearest half degree, and `1` will round to the nearest degree. (You can set any number you want, but only one decimal place will be displayed at most.)<br><br> **Type:** `Float` <br>**Default value:** `.5`
-| `roundTargetTemperature`		| **DEPRECATED** You should remove this from your config file if you have one set.
-| `roundAmbientTemperature`		| **DEPRECATED** You should remove this from your config file if you have one set.
+| `roundTargetTemperature`		| **DEPRECATED** You should remove this from your config file if you have one set, otherwise it could override `targetTemperaturePrecision`.
+| `roundAmbientTemperature`		| **DEPRECATED** You should remove this from your config file if you have one set, otherwise it could override `ambientTemperaturePrecision`.
 | `diameter`					| The diamiter of the dial. Dosen't affect the size of the dial but the size of the elements on the dials. <br><br> **Type:** `Integer` <br>**Default value:** `400`
 
 ## How it works
