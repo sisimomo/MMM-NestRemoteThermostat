@@ -239,7 +239,7 @@ class NestThermostat {
 			cx: this.properties.radius + this.options.iconSize/2.75,
 			cy: (this.properties.radius + ((this.properties.radius/16) * 10)) - (this.options.iconSize/2) + ((this.options.iconSize/16) * 13),
 			r: this.options.iconSize/4,
-			class: 'dial__shape dial--state--off'
+			class: 'dial__shape dial--state--off power__circle'
 		}, this.dom.svg);
 
 		// lblPowerLabel
