@@ -1,8 +1,8 @@
 /*
-* Magic Mirror Module: MMM-NestRemoteThermostat (https://github.com/sisimomo/MMM-NestRemoteThermostat)
+* MagicMirror² Module: MMM-NestRemoteThermostat (https://github.com/sisimomo/MMM-NestRemoteThermostat)
 * By Simon Vallières (https://www.linkedin.com/in/simon-vallieres-358555187/)
 *
-* Base on Magic Mirror Module: MMM-RemoteTemperature (https://github.com/balassy/MMM-RemoteTemperature)
+* Base on MagicMirror² Module: MMM-RemoteTemperature (https://github.com/balassy/MMM-RemoteTemperature)
 * By György Balássy (https://www.linkedin.com/in/balassy)
 *
 * Base on codepen.io example: https://codepen.io/dalhundal/pen/KpabZB
