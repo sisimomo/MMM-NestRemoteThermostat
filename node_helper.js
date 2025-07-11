@@ -1,3 +1,4 @@
+const Log = require('logger')
 const bodyParser = require('body-parser');
 const NodeHelper = require('node_helper');
 
@@ -7,8 +8,8 @@ module.exports = NodeHelper.create({
 		this.expressApp.post('/remote-nest-thermostat', (req, res) => {
 			const params = req.body;
 
-			console.log(`MMM-NestRemoteThermostat Node helper: New message receive: `);
-			console.log(JSON.stringify(params, null, 4))
+			Log.debug(`MMM-NestRemoteThermostat Node helper: New message received: `);
+			Log.debug(JSON.stringify(params, null, 4))
 
 			const payload = {
 				thermostatId: params.thermostatId,
@@ -28,7 +29,7 @@ module.exports = NodeHelper.create({
 
 	socketNotificationReceived(notificationName, payload) {
 		if (notificationName === 'MMM-NestRemoteThermostat.INIT') {
-			console.log(`MMM-NestRemoteThermostat Node helper: Init notification received from module for thermostat "${payload.thermostatId}".`); // eslint-disable-line no-console
+			Log.log(`MMM-NestRemoteThermostat Node helper: Init notification received from module for thermostat "${payload.thermostatId}".`); // eslint-disable-line no-console
 		}
 	},
 });
