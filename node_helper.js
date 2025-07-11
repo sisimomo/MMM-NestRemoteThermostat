@@ -8,8 +8,8 @@ module.exports = NodeHelper.create({
 		this.expressApp.post('/remote-nest-thermostat', (req, res) => {
 			const params = req.body;
 
-			Log.log(`MMM-NestRemoteThermostat Node helper: New message received: `);
-			Log.log(JSON.stringify(params, null, 4))
+			Log.debug(`MMM-NestRemoteThermostat Node helper: New message received: `);
+			Log.debug(JSON.stringify(params, null, 4))
 
 			const payload = {
 				thermostatId: params.thermostatId,
